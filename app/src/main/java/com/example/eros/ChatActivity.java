@@ -59,3 +59,30 @@ protected void onCreate(Bundle savedInstanceState) {
 
     // Resto igual...
 }
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    binding = ActivityChatBinding.inflate(getLayoutInflater());
+    setContentView(binding.getRoot());
+
+    String matchName = getIntent().getStringExtra("matchName");
+    if (matchName != null) {
+        setTitle("Chat con " + matchName);
+    }
+
+    messages = new ArrayList<>(ChatStorage.loadMessages(this, matchName)); // ← cargar mensajes previos
+    adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, messages);
+    binding.listView.setAdapter(adapter);
+
+    binding.btnSend.setOnClickListener(v -> {
+        String msg = binding.editMessage.getText().toString().trim();
+        if (!msg.isEmpty()) {
+            messages.add("Yo: " + msg);
+            adapter.notifyDataSetChanged();
+            binding.editMessage.setText("");
+
+            // Guardar chat
+            ChatStorage.saveMessages(this, matchName, messages);
+        }
+    });
+    }
