@@ -23,3 +23,12 @@
     android:textColor="@color/white"
     android:textStyle="bold"
     android:layout_margin="12dp"/>
+<com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:id="@+id/btnLike"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@android:drawable/btn_star_big_on"
+    android:contentDescription="Like"
+    android:tint="@color/white"
+    app:backgroundTint="@color/colorPrimary"
+    android:layout_gravity="center"/>
