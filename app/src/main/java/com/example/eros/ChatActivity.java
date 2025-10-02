@@ -45,3 +45,17 @@ public class ChatActivity extends AppCompatActivity {
         });
     }
 }
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    binding = ActivityChatBinding.inflate(getLayoutInflater());
+    setContentView(binding.getRoot());
+
+    // Obtener nombre del match
+    String matchName = getIntent().getStringExtra("matchName");
+    if (matchName != null) {
+        setTitle("Chat con " + matchName);
+    }
+
+    // Resto igual...
+}
