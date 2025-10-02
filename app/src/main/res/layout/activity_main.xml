@@ -14,3 +14,12 @@
     android:layout_height="wrap_content"
     android:text="Mis Matches"
     android:layout_margin="8dp"/>
+<Button
+    android:id="@+id/btnMatches"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="💘 Mis Matches"
+    android:background="@drawable/rounded_button"
+    android:textColor="@color/white"
+    android:textStyle="bold"
+    android:layout_margin="12dp"/>
