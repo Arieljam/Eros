@@ -1,0 +1,8 @@
+<resources>
+    <color name="colorPrimary">#FF3366</color> <!-- rojo pasión -->
+    <color name="colorPrimaryDark">#CC2952</color>
+    <color name="colorAccent">#FFD369</color> <!-- amarillo suave -->
+    <color name="chatBackground">#FFF0F5</color> <!-- rosa claro -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+</resources>
