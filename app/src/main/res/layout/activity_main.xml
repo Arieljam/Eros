@@ -16,7 +16,7 @@
     android:text="Mis Matches"
     android:layout_margin="8dp"/>
 <Button
-    android:id="@+id/btnMatches"
+    android:id="@+id/btnSettings"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="💘 Mis Matches"
