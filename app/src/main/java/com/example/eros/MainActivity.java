@@ -56,3 +56,25 @@ public class MainActivity extends AppCompatActivity {
         binding.cardStackView.setAdapter(adapter);
     }
 }
+// Lista de usuarios que me gustan
+private List<String> myLikes = new ArrayList<>();
+
+// Lista de matches confirmados
+private List<String> matches = new ArrayList<>();
+
+// Cuando hago "like"
+private void likeUser(String user) {
+    if (!myLikes.contains(user)) {
+        myLikes.add(user);
+
+        // Simulación: si el otro también me dio like
+        if (user.equals("Ana") || user.equals("Lucía")) { // ejemplo
+            matches.add(user);
+
+            // Abrir chat automáticamente
+            Intent intent = new Intent(MainActivity.this, ChatActivity.class);
+            intent.putExtra("matchName", user);
+            startActivity(intent);
+        }
+    }
+                                                 }
