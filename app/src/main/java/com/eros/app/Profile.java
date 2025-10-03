@@ -1,4 +1,4 @@
-package com.eros.app;
+package com.example.eros;
 
 public class Profile {
     private String name;
@@ -11,7 +11,15 @@ public class Profile {
         this.imageUrl = imageUrl;
     }
 
-    public String getName() { return name; }
-    public int getAge() { return age; }
-    public String getImageUrl() { return imageUrl; }
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
 }
