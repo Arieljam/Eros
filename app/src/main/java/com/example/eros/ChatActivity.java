@@ -1,88 +1,56 @@
 package com.example.eros;
 
 import android.os.Bundle;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
-import com.example.eros.databinding.ActivityChatBinding;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ChatActivity extends AppCompatActivity {
 
-    private ActivityChatBinding binding;
-    private ChatAdapter adapter;
+    private RecyclerView recyclerChat;
+    private EditText inputMessage;
+    private Button btnSend;
+    private ChatAdapter chatAdapter;
     private List<Message> messages;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityChatBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_chat);
 
-        // Lista de mensajes
+        recyclerChat = findViewById(R.id.recyclerChat);
+        inputMessage = findViewById(R.id.inputMessage);
+        btnSend = findViewById(R.id.btnSend);
+
         messages = new ArrayList<>();
-        adapter = new ChatAdapter(messages);
+        chatAdapter = new ChatAdapter(messages);
 
-        // Configurar RecyclerView
-        binding.recyclerChat.setLayoutManager(new LinearLayoutManager(this));
-        binding.recyclerChat.setAdapter(adapter);
+        recyclerChat.setLayoutManager(new LinearLayoutManager(this));
+        recyclerChat.setAdapter(chatAdapter);
 
-        // Enviar mensaje
-        binding.btnSend.setOnClickListener(v -> {
-            String text = binding.inputMessage.getText().toString();
-            if (!text.isEmpty()) {
-                messages.add(new Message("Yo", text));
-                adapter.notifyItemInserted(messages.size() - 1);
-                binding.inputMessage.setText("");
-                binding.recyclerChat.scrollToPosition(messages.size() - 1);
-            } else {
-                Toast.makeText(this, "Escribe un mensaje", Toast.LENGTH_SHORT).show();
+        btnSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text = inputMessage.getText().toString().trim();
+                if (!text.isEmpty()) {
+                    messages.add(new Message(text, true)); // true = enviado por mí
+                    chatAdapter.notifyItemInserted(messages.size() - 1);
+                    recyclerChat.scrollToPosition(messages.size() - 1);
+                    inputMessage.setText("");
+
+                    // Simulación de respuesta automática
+                    messages.add(new Message("Respuesta automática 😅", false));
+                    chatAdapter.notifyItemInserted(messages.size() - 1);
+                    recyclerChat.scrollToPosition(messages.size() - 1);
+                }
             }
         });
     }
-}
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    binding = ActivityChatBinding.inflate(getLayoutInflater());
-    setContentView(binding.getRoot());
-
-    // Obtener nombre del match
-    String matchName = getIntent().getStringExtra("matchName");
-    if (matchName != null) {
-        setTitle("Chat con " + matchName);
-    }
-
-    // Resto igual...
-}
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    binding = ActivityChatBinding.inflate(getLayoutInflater());
-    setContentView(binding.getRoot());
-
-    String matchName = getIntent().getStringExtra("matchName");
-    if (matchName != null) {
-        setTitle("Chat con " + matchName);
-    }
-
-    messages = new ArrayList<>(ChatStorage.loadMessages(this, matchName)); // ← cargar mensajes previos
-    adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, messages);
-    binding.listView.setAdapter(adapter);
-
-    binding.btnSend.setOnClickListener(v -> {
-        String msg = binding.editMessage.getText().toString().trim();
-        if (!msg.isEmpty()) {
-            messages.add("Yo: " + msg);
-            adapter.notifyDataSetChanged();
-            binding.editMessage.setText("");
-
-            // Guardar chat
-            ChatStorage.saveMessages(this, matchName, messages);
-        }
-    });
-    }
+                                                  }
