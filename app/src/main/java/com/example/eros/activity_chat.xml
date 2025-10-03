@@ -1,60 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="@color/chatBackground"
+    android:padding="8dp">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerChat"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="8dp"/>
+        android:layout_weight="1"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="8dp">
+        android:paddingTop="8dp">
 
         <EditText
             android:id="@+id/inputMessage"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Escribe un mensaje"/>
-
-        <Button
-            android:id="@+id/btnSend"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Enviar"/>
-    </LinearLayout>
-</LinearLayout>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/chatBackground"
-    android:padding="12dp">
-
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:dividerHeight="8dp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/editMessage"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_weight="1"
             android:hint="Escribe un mensaje..."
             android:background="@drawable/rounded_button"
@@ -64,9 +31,10 @@
 
         <Button
             android:id="@+id/btnSend"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="56dp"
+            android:layout_height="48dp"
             android:text="➤"
+            android:layout_marginStart="8dp"
             android:background="@drawable/rounded_button"
             android:textColor="@color/white"/>
     </LinearLayout>
