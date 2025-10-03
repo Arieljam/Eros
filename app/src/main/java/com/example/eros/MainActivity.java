@@ -1,15 +1,13 @@
-package com.eros.app;
+package com.example.eros;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager;
-import com.yuyakaido.android.cardstackview.CardStackListener;
 import com.yuyakaido.android.cardstackview.CardStackView;
-import com.yuyakaido.android.cardstackview.Direction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,63 +15,37 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private CardStackView cardStackView;
-    private CardStackLayoutManager manager;
     private ProfileAdapter adapter;
-
-    private Button btnMatches;
-    private Button btnSettings;
+    private List<Profile> profiles;
+    private Button btnMatches, btnChat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Referencias UI
         cardStackView = findViewById(R.id.cardStackView);
         btnMatches = findViewById(R.id.btnMatches);
-        btnSettings = findViewById(R.id.btnSettings);
+        btnChat = findViewById(R.id.btnChat);
 
-        // Configuración CardStack
-        manager = new CardStackLayoutManager(this, new CardStackListener() {
-            @Override
-            public void onCardSwiped(Direction direction) {
-                if (direction == Direction.Right) {
-                    Toast.makeText(MainActivity.this, "💘 ¡Match!", Toast.LENGTH_SHORT).show();
-                } else if (direction == Direction.Left) {
-                    Toast.makeText(MainActivity.this, "❌ No te interesa", Toast.LENGTH_SHORT).show();
-                }
-            }
-            // Otros métodos vacíos
-            @Override public void onCardDragging(Direction direction, float ratio) {}
-            @Override public void onCardRewound() {}
-            @Override public void onCardCanceled() {}
-            @Override public void onCardAppeared(android.view.View view, int position) {}
-            @Override public void onCardDisappeared(android.view.View view, int position) {}
-        });
+        profiles = new ArrayList<>();
+        profiles.add(new Profile("Lucía", 22, "https://randomuser.me/api/portraits/women/44.jpg"));
+        profiles.add(new Profile("Carlos", 28, "https://randomuser.me/api/portraits/men/34.jpg"));
+        profiles.add(new Profile("Sofía", 25, "https://randomuser.me/api/portraits/women/65.jpg"));
+        profiles.add(new Profile("Andrés", 30, "https://randomuser.me/api/portraits/men/22.jpg"));
 
-        adapter = new ProfileAdapter(getSampleProfiles());
+        adapter = new ProfileAdapter(this, profiles);
+        CardStackLayoutManager manager = new CardStackLayoutManager(this);
         cardStackView.setLayoutManager(manager);
         cardStackView.setAdapter(adapter);
 
-        // Botón Matches
-        btnMatches.setOnClickListener(v -> 
-            Toast.makeText(MainActivity.this, "Abrir lista de matches", Toast.LENGTH_SHORT).show()
-        );
+        btnMatches.setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, MatchesActivity.class));
+        });
 
-        // Botón Configuración
-        btnSettings.setOnClickListener(v -> 
-            Toast.makeText(MainActivity.this, "Abrir configuración", Toast.LENGTH_SHORT).show()
-        );
+        btnChat.setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, ChatActivity.class));
+        });
     }
-
-    // Datos de prueba (se cambiarán después por Firebase)
-    private List<Profile> getSampleProfiles() {
-        List<Profile> profiles = new ArrayList<>();
-        profiles.add(new Profile("Ana", 24, "https://randomuser.me/api/portraits/women/1.jpg"));
-        profiles.add(new Profile("Lucía", 27, "https://randomuser.me/api/portraits/women/2.jpg"));
-        profiles.add(new Profile("María", 22, "https://randomuser.me/api/portraits/women/3.jpg"));
-        profiles.add(new Profile("Sofía", 29, "https://randomuser.me/api/portraits/women/4.jpg"));
-        return profiles;
-    }
-}
+                                      }
                                                  }
