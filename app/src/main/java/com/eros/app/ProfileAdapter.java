@@ -1,5 +1,6 @@
-package com.eros.app;
+package com.example.eros;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,31 +10,36 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHolder> {
+public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileViewHolder> {
 
+    private Context context;
     private List<Profile> profiles;
 
-    public ProfileAdapter(List<Profile> profiles) {
+    public ProfileAdapter(Context context, List<Profile> profiles) {
+        this.context = context;
         this.profiles = profiles;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_profile, parent, false);
-        return new ViewHolder(view);
+    public ProfileViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.item_profile, parent, false);
+        return new ProfileViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ProfileViewHolder holder, int position) {
         Profile profile = profiles.get(position);
-        holder.name.setText(profile.getName() + ", " + profile.getAge());
-        Picasso.get().load(profile.getImageUrl()).into(holder.image);
+        holder.textName.setText(profile.getName() + ", " + profile.getAge());
+
+        Glide.with(context)
+                .load(profile.getImageUrl())
+                .centerCrop()
+                .into(holder.imageProfile);
     }
 
     @Override
@@ -41,14 +47,14 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
         return profiles.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name;
-        ImageView image;
+    static class ProfileViewHolder extends RecyclerView.ViewHolder {
+        TextView textName;
+        ImageView imageProfile;
 
-        public ViewHolder(View itemView) {
+        public ProfileViewHolder(@NonNull View itemView) {
             super(itemView);
-            name = itemView.findViewById(R.id.profileName);
-            image = itemView.findViewById(R.id.profileImage);
+            textName = itemView.findViewById(R.id.textName);
+            imageProfile = itemView.findViewById(R.id.imageProfile);
         }
     }
-}
+                }
