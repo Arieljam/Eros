@@ -1,44 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
     android:background="@drawable/background_gradient">
 
-    <!-- Tarjetas estilo Tinder -->
-    <com.yuyakaido.android.cardstackview.CardStackView
-        android:id="@+id/cardStackView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <!-- Contenedor de botones en la parte inferior -->
-    <LinearLayout
-        android:id="@+id/bottomButtons"
+    <!-- Barra superior -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:titleTextColor="@android:color/white" />
+
+    <!-- Botones de acción -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_gravity="bottom"
-        android:padding="12dp"
-        android:background="@android:color/transparent">
+        android:gravity="center"
+        android:padding="24dp">
 
         <Button
-            android:id="@+id/btnMatches"
+            android:id="@+id/btnLogin"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text="@string/mis_matches"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/rounded_button"
-            android:textColor="@color/white"
-            android:textStyle="bold"/>
+            android:layout_height="wrap_content"
+            android:text="Iniciar Sesión"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/purple_500"
+            android:textColor="@android:color/white" />
 
         <Button
-            android:id="@+id/btnSettings"
+            android:id="@+id/btnRegister"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text="@string/configuracion"
-            android:background="@android:color/transparent"
-            android:textColor="@color/white"/>
+            android:layout_height="wrap_content"
+            android:text="Registrarse"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/teal_700"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/btnExplore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Explorar sin cuenta"
+            android:backgroundTint="@color/black"
+            android:textColor="@android:color/white" />
 
     </LinearLayout>
-
-</FrameLayout>
+</LinearLayout>
