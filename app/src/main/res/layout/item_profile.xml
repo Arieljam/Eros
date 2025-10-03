@@ -11,14 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- Imagen del perfil -->
         <ImageView
             android:id="@+id/profileImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop" />
 
-        <!-- Nombre y edad -->
         <TextView
             android:id="@+id/profileName"
             android:layout_width="wrap_content"
