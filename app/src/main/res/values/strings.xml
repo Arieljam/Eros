@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Eros</string>
+    <string name="mis_matches">Mis Matches</string>
+    <string name="configuracion">Configuración</string>
+</resources>
