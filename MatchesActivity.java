@@ -1,6 +1,5 @@
 package com.example.eros;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -8,33 +7,28 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MatchesActivity extends AppCompatActivity {
 
-    private ArrayList<String> matches;
+    private ListView listMatches;
+    private ArrayAdapter<String> adapter;
+    private List<String> matches;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_matches);
 
-        ListView listView = findViewById(R.id.listMatches);
+        listMatches = findViewById(R.id.listMatches);
 
-        // Obtener matches simulados (se podrían pasar desde MainActivity)
+        // Lista de ejemplo (después conectamos con Firebase o backend)
         matches = new ArrayList<>();
-        matches.add("Ana");
-        matches.add("Lucía");
+        matches.add("Ana, 25");
+        matches.add("Carlos, 28");
+        matches.add("Lucía, 22");
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, matches);
-        listView.setAdapter(adapter);
-
-        // Al hacer clic en un match → abrir chat
-        listView.setOnItemClickListener((parent, view, position, id) -> {
-            String name = matches.get(position);
-            Intent intent = new Intent(MatchesActivity.this, ChatActivity.class);
-            intent.putExtra("matchName", name);
-            startActivity(intent);
-        });
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, matches);
+        listMatches.setAdapter(adapter);
     }
-                       }
+    }
