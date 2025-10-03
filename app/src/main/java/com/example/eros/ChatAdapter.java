@@ -21,16 +21,22 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
     @NonNull
     @Override
     public ChatViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_message, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message, parent, false);
         return new ChatViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ChatViewHolder holder, int position) {
         Message message = messages.get(position);
-        holder.sender.setText(message.sender);
-        holder.text.setText(message.text);
+        holder.textMessage.setText(message.getText());
+
+        if (message.isMine()) {
+            holder.textMessage.setBackgroundResource(R.drawable.rounded_button);
+            holder.textMessage.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
+        } else {
+            holder.textMessage.setBackgroundResource(android.R.color.darker_gray);
+            holder.textMessage.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
+        }
     }
 
     @Override
@@ -39,12 +45,11 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
     }
 
     public static class ChatViewHolder extends RecyclerView.ViewHolder {
-        TextView sender, text;
+        TextView textMessage;
 
         public ChatViewHolder(@NonNull View itemView) {
             super(itemView);
-            sender = itemView.findViewById(R.id.textSender);
-            text = itemView.findViewById(R.id.textMessage);
+            textMessage = itemView.findViewById(R.id.textMessage);
         }
     }
-                                 }
+}
